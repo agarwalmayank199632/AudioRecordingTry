@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -141,7 +140,7 @@ public class RecordingActivity_With2Buttons extends AppCompatActivity {
                     {
                         if(m.isPlaying())
                         {
-                            imageButton2.setBackgroundResource(R.drawable.stop);
+                            imageButton2.setBackgroundResource(R.drawable.play);
                             m.stop();
                         }
                         else
@@ -164,7 +163,7 @@ public class RecordingActivity_With2Buttons extends AppCompatActivity {
                         myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                         myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
                         myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.DEFAULT);
-                        outputFile = dir+"/MayankRecord"+recordingNumber+".mp4";
+                        outputFile = dir+"/Recording"+recordingNumber+".mp4";
                         myAudioRecorder.setOutputFile(outputFile);
                         recordingNumber++;
                         myAudioRecorder.prepare();
@@ -182,7 +181,7 @@ public class RecordingActivity_With2Buttons extends AppCompatActivity {
         imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) throws IllegalArgumentException,SecurityException,IllegalStateException {
-                MediaPlayer m = new MediaPlayer();
+                m = new MediaPlayer();
                 try {
                     m.setDataSource(outputFile);
                 }
@@ -196,8 +195,10 @@ public class RecordingActivity_With2Buttons extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 m.start();
+                imageButton2.setBackgroundResource(R.drawable.stop);
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 imageButton2.setEnabled(true);
+                flag=1;
                 Toast.makeText(getApplicationContext(), "Playing audio", Toast.LENGTH_LONG).show();
             }
         });
